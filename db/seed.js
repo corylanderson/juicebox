@@ -1,9 +1,6 @@
 // grab our client with destructuring from the export in index.js
 
-const {
-  client,
-  getAllUsers, // new
-} = require("./index");
+const { client, getAllUsers, createUser } = require("./index");
 
 // drop, create, seed:
 
@@ -42,28 +39,29 @@ async function createTables() {
   }
 }
 
-const { createUser } = require("./index");
-
-//new function, should attempt to create a few users
-
 async function createInitialUsers() {
   try {
     console.log("starting to create users...");
 
-    const albert = await createUser({
-      username: "albert",
-      password: "bertie99",
-    });
+    await createUser({ username: "albert", password: "bertie99" });
+    await createUser({ username: "sandra", password: "2sandy4me" });
+    await createUser({ username: "glamgal", password: "soglam" });
 
-    const sandra = createUser({
-      username: "sandra",
-      password: "2sandy4me",
-    });
+    //creating individual users - swapped with lines above
+    // const albert = await createUser({
+    //   username: "albert",
+    //   password: "bertie99",
+    // });
 
-    const glamgal = createUser({
-      username: "glamgal",
-      password: "soglam",
-    });
+    // const sandra = createUser({
+    //   username: "sandra",
+    //   password: "2sandy4me",
+    // });
+
+    // const glamgal = createUser({
+    //   username: "glamgal",
+    //   password: "soglam",
+    // });
 
     // console.log(albert);
 
@@ -82,7 +80,8 @@ async function rebuildDB() {
     await createTables();
     await createInitialUsers();
   } catch (error) {
-    console.error(error);
+    throw error;
+    // console.error(error); - swapped with line above
   }
 }
 
