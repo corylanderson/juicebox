@@ -1,6 +1,6 @@
 // grab our client with destructuring from the export in index.js
 
-const { client, getAllUsers, createUser } = require("./index");
+const { client, getAllUsers, createUser, updateUser } = require("./index");
 
 // drop, create, seed:
 
@@ -92,8 +92,18 @@ async function testDB() {
   try {
     console.log("starting to test database...");
 
+    console.log("calling getAllUsers");
     const users = await getAllUsers();
-    console.log("getAllUsers", users);
+    console.log("getAllUsers Result", users);
+
+    console.log("calling updateUser on users[0]");
+
+    const updateUserResult = await updateUser(users[0].id, {
+      name: "new bert",
+      location: "new bert location",
+    });
+    console.log("updateUser Result", updateUserResult);
+
     console.log("finished database tests!");
   } catch (error) {
     console.error(error, "error testing database!");

@@ -21,7 +21,7 @@ async function createUser({ username, password, name, location }) {
       `,
       [username, password, name, location]
     );
-    return rows;
+    return { rows: [user] };
   } catch (error) {
     throw error;
   }
@@ -53,7 +53,9 @@ async function updateUser(id, fields = {}) {
   }
 
   try {
-    const result = await client.query(
+    const {
+      rows: [user],
+    } = await client.query(
       `
       UPDATE users
       SET ${setString}
@@ -62,8 +64,7 @@ async function updateUser(id, fields = {}) {
     `,
       Object.values(fields)
     );
-
-    return result;
+    return user;
   } catch (error) {
     throw error;
   }
@@ -73,5 +74,6 @@ module.exports = {
   client,
   getAllUsers,
   createUser,
+  updateUser,
   updateUser,
 };
