@@ -28,8 +28,11 @@ async function createTables() {
       CREATE TABLE users (
       id SERIAL PRIMARY KEY, 
       username varchar(255) UNIQUE NOT NULL, 
-      password varchar(255) NOT NULL  
-      );
+      password varchar(255) NOT NULL,  
+      name VARCHAR(255) NOT NULL,
+      location VARCHAR(255) NOT NULL,
+      active BOOLEAN DEFAULT true
+       );
     `);
 
     console.log("finished building tables!");
@@ -43,27 +46,27 @@ async function createInitialUsers() {
   try {
     console.log("starting to create users...");
 
-    await createUser({ username: "albert", password: "bertie99" });
-    await createUser({ username: "sandra", password: "2sandy4me" });
-    await createUser({ username: "glamgal", password: "soglam" });
-
-    //creating individual users - swapped with lines above
-    // const albert = await createUser({
-    //   username: "albert",
-    //   password: "bertie99",
-    // });
-
-    // const sandra = createUser({
-    //   username: "sandra",
-    //   password: "2sandy4me",
-    // });
-
-    // const glamgal = createUser({
-    //   username: "glamgal",
-    //   password: "soglam",
-    // });
-
-    // console.log(albert);
+    await createUser({
+      username: "albert",
+      password: "bertie99",
+      name: "big bert",
+      location: "bertville",
+      active: "",
+    });
+    await createUser({
+      username: "sandra",
+      password: "2sandy4me",
+      name: "sandy koufax",
+      location: "LA",
+      active: "",
+    });
+    await createUser({
+      username: "glamgal",
+      password: "soglam",
+      name: "bunny lebowski",
+      location: "venice, ca",
+      active: "",
+    });
 
     console.log("finished creating users!");
   } catch (error) {
