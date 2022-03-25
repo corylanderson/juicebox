@@ -10,7 +10,9 @@ const client = new Client("postgres://localhost:5432/juicebox-dev");
 
 // ----create user method ----
 
-async function createUser({ username, password, name, location }) {
+//brought destructured user into the return as an update method.
+
+async function createUser({ username, password, name, location, user }) {
   try {
     const { rows } = await client.query(
       `
