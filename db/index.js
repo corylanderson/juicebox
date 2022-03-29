@@ -1,5 +1,13 @@
 //    ---- backend methods ----
 
+const PORT = 3000;
+const express = require("express");
+const server = express();
+
+server.listen(PORT, () => {
+  console.log("The server is up on port", PORT);
+});
+
 //imports the pg module
 const { Client } = require("pg");
 
