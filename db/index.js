@@ -330,6 +330,20 @@ async function getPostById(postId) {
   }
 }
 
+async function getAllTags() {
+  try {
+    const { rows } = await client.query(
+      `SELECT *
+      FROM tags;
+    `
+    );
+
+    return rows;
+  } catch (error) {
+    throw error;
+  }
+}
+
 async function getPostsByTagName(tagName) {
   try {
     const { rows: postIds } = await client.query(
@@ -349,13 +363,6 @@ async function getPostsByTagName(tagName) {
   }
 }
 
-const PORT = 3000;
-const express = require("express");
-const server = express();
-
-server.listen(PORT, () => {
-  console.log("The server is up on port", PORT);
-});
 module.exports = {
   client,
   getAllUsers,
@@ -371,4 +378,5 @@ module.exports = {
   createPostTag,
   createTags,
   getPostsByTagName,
+  getAllTags,
 };
